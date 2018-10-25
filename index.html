@@ -4,14 +4,16 @@
     <title>Payment System</title>
  <link rel="stylesheet" href="css/main.css">
 </head>
-  <body>
+<body>
     <script src="js/jsquery.js"></script>
     <script src="js/config/baseConfig.js"></script>
-    <script src="js/main.js" ></script>
-
+    <script src="js/main.js"></script>
+    <script src="js/index.js"></script>
     <script>
-        createHeader(baseConfig);
-        createTopProviders(baseConfig.topProviders);
+
+        let indexPage = new IndexPageMaker(baseConfig);
+        indexPage.build();
+       
     </script>
-  </body>
+</body>
 </html>
