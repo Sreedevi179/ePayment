@@ -43,11 +43,12 @@
         //get total width of every item in block
         let totalItemwidth = (100 / count) - 1;
 
+
         //dynamicly create elements and add to main container
         for (let topItem in _topProviders) {
 
-            let obj = config[topItem];
-
+            let obj = _topProviders[topItem];
+            
             let btn_div = createElement({ name: "div", class: "top-img-container relative", bgColor: obj.bgColor });
             let btn_div_img = createElement({ name: "img", class: "top-img-item absolute", src: obj.image });
             let btn_div_p = createElement({ name: "p", class: "top-text-item absolute", text: obj.name });
