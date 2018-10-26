@@ -1,4 +1,5 @@
-﻿function IndexPageMaker(config) {
+﻿var arr = new Array();
+function IndexPageMaker(config) {
 
     let _baseconfig = config;
     let _topProviders = _baseconfig["topProviders"];
@@ -43,12 +44,18 @@
         //get total width of every item in block
         let totalItemwidth = (100 / count) - 1;
 
-
+        //convert object to array and sort by order
+        let providersArray = new Array();
+        for (let item in _topProviders) {
+            providersArray.push(_topProviders[item]);
+        }
+        providersArray.sort(function (a, b) {
+            return a.order - b.order;
+        });
+        
         //dynamicly create elements and add to main container
-        for (let topItem in _topProviders) {
+        for (let obj of providersArray) {
 
-            let obj = _topProviders[topItem];
-            
             let btn_div = createElement({ name: "div", class: "top-img-container relative", bgColor: obj.bgColor });
             let btn_div_img = createElement({ name: "img", class: "top-img-item absolute", src: obj.image });
             let btn_div_p = createElement({ name: "p", class: "top-text-item absolute", text: obj.name });
