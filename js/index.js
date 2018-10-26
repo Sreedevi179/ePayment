@@ -1,9 +1,11 @@
 ﻿var arr = new Array();
-function IndexPageMaker(config) {
+function IndexPageMaker() {
 
-    let _baseconfig = config;
-    let _topProviders = _baseconfig["topProviders"];
-    this.createHeader = function () {
+    let _baseConfig = null;
+    let _topProviders = null;
+
+    this.createHeader = function (config) {
+        _baseConfig = config;
         let header = createElement({ name: "header", class: "relative" });
 
         let header_img = createElement({ name: "img", class: "img header-image", src: "img/index_up.png" });
@@ -33,8 +35,10 @@ function IndexPageMaker(config) {
         logo_container.appendChild(info_img);
         header.appendChild(logo_container);
         document.body.appendChild(header);
-    }
-    this.createTopProviders = function () {
+    };
+
+    this.createTopProviders = function (config) {
+        _topProviders = config;
         //create main container for top elements
         let divContainer = createElement({ name: "div", class: "top-element-container" });
 
@@ -52,7 +56,7 @@ function IndexPageMaker(config) {
         providersArray.sort(function (a, b) {
             return a.order - b.order;
         });
-        
+
         //dynamicly create elements and add to main container
         for (let obj of providersArray) {
 
@@ -72,17 +76,19 @@ function IndexPageMaker(config) {
         }
 
         document.body.appendChild(divContainer);
-    }
-
-    this.configureHeader = function (x) {
-        _baseconfig = x;
     };
-    this.configureTopProviders = function (x) {
-        _topProviders = x;
+
+    this.configureHeader = function (callback) {
+        _baseconfig = callback();
+        return this;
+    };
+    this.configureTopProviders = function (callback) {
+        _topProviders = callback();
+        return this;
     };
 
     this.build = function () {
-        this.createHeader();
-        this.createTopProviders();
+        this.createHeader(_baseconfig);
+        this.createTopProviders(_topProviders);
     };
 }

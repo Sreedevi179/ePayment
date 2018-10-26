@@ -11,8 +11,12 @@
     <script src="js/index.js"></script>
     <script>
 
-        let indexPage = new IndexPageMaker(baseConfig);
-        indexPage.build();
+        let indexPage = new IndexPageMaker();
+
+        indexPage.configureHeader(x => baseConfig)
+                            .configureTopProviders(x => baseConfig["topProviders"])
+                                    .build();
+       
        
     </script>
 </body>
